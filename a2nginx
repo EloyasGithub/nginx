@@ -1,0 +1,46 @@
+#!/bin/bash
+
+############################################################
+#Obligation d'être administrateur pour lancé cette commande#
+############################################################
+
+if [ "$UID" -ne "0" ]
+then
+   echo "Avez-vous les privilèges du superutilisateur ?"
+   exit 1
+fi
+
+if [ $# = 0 ]; then
+
+    echo "Quelle configuration souhaitez-vous activer ?"
+    read fileName
+
+    if [ ! -f "/etc/nginx/sites-available/$fileName" ]; then
+        echo -E "ERREUR -> le fichier de configuration \"$fileName\" n'existe pas"
+        exit 1
+    elif [ -h "/etc/nginx/sites-enabled/$fileName" ]; then
+        echo -E "La configuration \"$fileName\" est déjà active"
+        exit 0
+    else
+        `ln -s /etc/nginx/sites-available/${fileName} /etc/nginx/sites-enabled/${fileName}`
+        sed -i "1i127.0.0.1\t$fileName.dev" /etc/hosts
+        echo -E "Le fichier de configuration : \"$fileName\" est activé"
+    fi
+
+else
+
+    for fileName in $@; do
+        if [ ! -f "/etc/nginx/sites-available/$fileName" ]; then
+            echo -E "ERREUR -> le fichier de configuration \"$fileName\" n'existe pas"
+		    continue
+        elif [ -h "/etc/nginx/sites-enabled/$fileName" ]; then
+            echo -E "La configuration \"$fileName\" est déjà active"
+            continue
+        else
+            `ln -s /etc/nginx/sites-available/${fileName} /etc/nginx/sites-enabled/${fileName}`
+            sed -i "1i127.0.0.1\t$fileName.dev" /etc/hosts
+            echo -E "Le fichier de configuration : \"$fileName\" est activé"
+        fi
+    done
+
+fi
