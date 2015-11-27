@@ -1,0 +1,44 @@
+#!/bin/bash
+
+##########################################################
+#Obligation d'être administrateur pour lancé cette commande#
+############################################################
+
+if [ "$UID" -ne "0" ]
+then
+   echo "Vous devez avoir les droits administrateur pour executer cette commande"
+   exit 1
+fi
+
+######
+#MAIN#
+######
+
+if [ $# = 0 ]; then
+
+    echo "Quelle configuration souhaitez-vous desactiver ?"
+    read fileName
+
+    if [ ! -h "/etc/nginx/sites-enabled/$fileName" ]; then
+        echo -E "La configuration \"$fileName\" n'est pas active"
+        exit 0
+    else
+        `rm /etc/nginx/sites-enabled/${fileName}`
+        sed -i "/127.0.0.1\t$fileName.dev/d" /etc/hosts
+        echo -E "Le fichier de configuration : \"$fileName\" est desactiver"
+    fi
+
+else
+
+    for fileName in $@; do
+        if [ ! -h "/etc/nginx/sites-enabled/$fileName" ]; then
+            echo -E "La configuration \"$fileName\" n'est pas active"
+            continue
+        else
+            `rm /etc/nginx/sites-enabled/${fileName}`
+            sed -i "/127.0.0.1\t$fileName.dev/d" /etc/hosts
+            echo -E "Le fichier de configuration : \"$fileName\" est activé"
+        fi
+    done
+
+fi
