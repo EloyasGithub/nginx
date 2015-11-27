@@ -1,4 +1,4 @@
-![Logo Nginx](https://www.guillaume-leduc.fr/wp-content/uploads/2014/05/nginx-logo.png)
+<div style="text-align:center"><img src ="https://www.guillaume-leduc.fr/wp-content/uploads/2014/05/nginx-logo.png" title="logo nginx" /></div>
 
 #A quoi sert ce dépôt ?
 
