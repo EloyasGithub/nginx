@@ -10,6 +10,12 @@ then
    exit 1
 fi
 
+`nginx -t >/dev/null 2>&1`
+if [ $? = 0 ];then
+    echo -E "ERREUR -> Un des fichiers de configuration présente une erreur. Activation des configurations impossible"
+    exit 1
+fi
+
 if [ $# = 0 ]; then
     read -p "Quelle configuration souhaitez-vous activer ? " fileName
     for i in `echo ${fileName} | tr " " " "`; do
