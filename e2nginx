@@ -11,7 +11,7 @@ then
 fi
 
 `nginx -t >/dev/null 2>&1`
-if [ $? = 0 ];then
+if [ $? != 0 ];then
     echo -E "ERREUR -> Un des fichiers de configuration présente une erreur. Activation des configurations impossible"
     exit 1
 fi
