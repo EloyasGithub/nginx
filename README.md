@@ -13,6 +13,11 @@ Voici la méthode à suivre pour installer ces *commandes* :
 2. `mv <path>/a2nginx <path>/d2nginx /usr/local/bin/`
 3. `chmod a+x /usr/local/bin/a2nginx /usr/local/bin/d2nginx`
 
+#Utilisation
+Peut importe la commande, vous pouvez employé l'une des deux méthodes si dessous  
+* Soit vous passez en paramètre le(s) fichier(s) lors de l'appel de la commande : `e2nginx conf conf1 confN`
+* Soit vous les précisez après l'appel de la commande `#: e2nginx` -> `#: conf conf1 confN`
+
 #A venir sur ce dépôt ?
 * Amélioration des commandes *a2nginx* et *d2nginx*
 * Ajout d'un fichier servant de point d'entré à nginx (de la même manière que wamp sous Windows)
