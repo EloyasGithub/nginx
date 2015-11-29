@@ -27,5 +27,3 @@ for fileName in $@; do
         echo -E "La configuration : \"$fileName\" a été désactivé"
     fi
 done
-
-fi
