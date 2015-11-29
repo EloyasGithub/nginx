@@ -11,7 +11,7 @@ then
 fi
 
 if [ $# = 0 ]; then
-    read -p "Quelle configuration souhaitez-vous activer ? " fileName
+    read -p "Quelle configuration souhaitez-vous désactiver ? " fileName
     for i in `echo ${fileName} | tr " " " "`; do
         set ${fileName}
     done
